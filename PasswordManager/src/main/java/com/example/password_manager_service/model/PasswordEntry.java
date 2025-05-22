@@ -3,6 +3,7 @@ package com.example.password_manager_service.model;
 import java.io.Serializable;
 
 public class PasswordEntry implements Serializable {
+    private int id;
     private String title;
     private String username;
     private String password;
@@ -20,7 +21,23 @@ public class PasswordEntry implements Serializable {
         this.notes = notes;
     }
 
+    public PasswordEntry(int id, String title, String username, String password, String website, String notes) {
+        this.id = id;
+        this.title = title;
+        this.username = username;
+        this.password = password;
+        this.website = website;
+        this.notes = notes;
+    }
+
     // Getters and Setters
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
