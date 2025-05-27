@@ -46,4 +46,17 @@ public class MasterPasswordValidator {
             return false;
         }
     }
+
+    public static boolean isSaltSet() throws Exception {
+        String sql = "SELECT EXISTS(SELECT 1 FROM app_config WHERE config_key = 'master_password_salt')";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getBoolean(1);
+            }
+        }
+        return false;
+    }
 }

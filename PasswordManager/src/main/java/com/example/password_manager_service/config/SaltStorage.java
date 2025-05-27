@@ -66,4 +66,17 @@ public class SaltStorage {
             pstmt.executeUpdate();
         }
     }
+
+    public static boolean isIVSet() throws Exception {
+        String sql = "SELECT EXISTS(SELECT 1 FROM app_config WHERE config_key = 'initialization_vector')";
+        try (Connection conn = DatabaseUtil.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            if (rs.next()) {
+                return rs.getBoolean(1);
+            }
+        }
+        return false;
+    }
 }

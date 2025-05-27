@@ -9,8 +9,18 @@ public class PasswordEntry implements Serializable {
     private String password;
     private String website;
     private String notes;
+    private int userId;
 
     public PasswordEntry() {
+    }
+
+    public PasswordEntry(String title, String username, String password, String website, String notes, int userId) {
+        this.title = title;
+        this.username = username;
+        this.password = password;
+        this.website = website;
+        this.notes = notes;
+        this.userId = userId;
     }
 
     public PasswordEntry(String title, String username, String password, String website, String notes) {
@@ -21,13 +31,14 @@ public class PasswordEntry implements Serializable {
         this.notes = notes;
     }
 
-    public PasswordEntry(int id, String title, String username, String password, String website, String notes) {
+    public PasswordEntry(int id, String title, String username, String password, String website, String notes, int userId) {
         this.id = id;
         this.title = title;
         this.username = username;
         this.password = password;
         this.website = website;
         this.notes = notes;
+        this.userId = userId;
     }
 
     // Getters and Setters
@@ -76,6 +87,13 @@ public class PasswordEntry implements Serializable {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     @Override
