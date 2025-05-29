@@ -34,13 +34,12 @@ public class LoginWindow extends JFrame {
         loginButton.addActionListener(e -> {
             String username = userField.getText();
             char[] password = passField.getPassword();
-
             try {
                 UserService userService = new UserService();
                 if (userService.authenticate(username, password)) {
                     byte[] salt = userService.loadSaltForUser(username);
                     SecretKeySpec key = KeyGeneratorUtil.deriveKey(password, salt);
-                    Arrays.fill(password, '0');
+                    Arrays.fill(password, '0'); // Clear sensitive data
 
                     IvParameterSpec iv;
                     try {
@@ -51,7 +50,7 @@ public class LoginWindow extends JFrame {
                     }
 
                     int userId = userService.getUserId(username);
-                    dispose(); // закрыть окно входа
+                    dispose(); // Close login window
                     IvParameterSpec finalIv = iv;
                     SwingUtilities.invokeLater(() -> new Main(key, finalIv, userId).setVisible(true));
                 } else {

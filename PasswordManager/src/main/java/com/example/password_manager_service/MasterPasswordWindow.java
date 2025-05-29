@@ -35,21 +35,24 @@ public class MasterPasswordWindow extends JFrame {
             }
 
             try {
+                // Hash and store the master password
                 String hash = BCrypt.hashpw(new String(masterPassword), BCrypt.gensalt());
                 MasterPasswordValidator.setMasterPasswordHash(hash);
 
+                // Generate and save salt and IV
                 byte[] salt = KeyGeneratorUtil.generateSalt();
                 SaltStorage.saveSalt(salt);
 
                 IvParameterSpec iv = KeyGeneratorUtil.generateIV();
                 SaltStorage.saveIV(iv.getIV());
 
+                // Derive encryption key
                 SecretKeySpec key = KeyGeneratorUtil.deriveKey(masterPassword, salt);
-                Arrays.fill(masterPassword, '0');
+                Arrays.fill(masterPassword, '0'); // Clear sensitive data
 
-                // Открытие окна регистрации
+                // Open registration window
                 dispose();
-                new RegistrationWindow().setVisible(true);
+                SwingUtilities.invokeLater(() -> new RegistrationWindow().setVisible(true));
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Error setting up master password: " + ex.getMessage());
             }
@@ -58,3 +61,4 @@ public class MasterPasswordWindow extends JFrame {
         setVisible(true);
     }
 }
+

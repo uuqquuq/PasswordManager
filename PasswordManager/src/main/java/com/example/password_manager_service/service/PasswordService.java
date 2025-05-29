@@ -1,6 +1,7 @@
 package com.example.password_manager_service.service;
 
 import com.example.password_manager_service.config.DatabaseUtil;
+import com.example.password_manager_service.config.EncryptionUtil;
 import com.example.password_manager_service.model.PasswordEntry;
 import java.sql.*;
 import java.util.ArrayList;
@@ -75,4 +76,5 @@ public class PasswordService {
             pstmt.executeUpdate();
         }
     }
+
 }

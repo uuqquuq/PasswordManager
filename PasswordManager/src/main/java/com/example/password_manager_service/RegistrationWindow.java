@@ -40,12 +40,12 @@ public class RegistrationWindow extends JFrame {
                 UserService userService = new UserService();
                 userService.registerUser(username, password);
                 JOptionPane.showMessageDialog(this, "Registration successful!");
-                dispose(); // закрыть окно регистрации
-                new LoginWindow().setVisible(true); // вернуться к логину
+                dispose(); // Close registration window
+                SwingUtilities.invokeLater(() -> new LoginWindow().setVisible(true));
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Registration failed: " + ex.getMessage());
             } finally {
-                Arrays.fill(password, '0');
+                Arrays.fill(password, '0'); // Clear sensitive data
             }
         });
 
