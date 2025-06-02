@@ -1,6 +1,5 @@
 package com.example.password_manager_service.config;
 
-import com.example.password_manager_service.config.DatabaseUtil;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
